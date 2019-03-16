@@ -1,0 +1,19 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "backend app",
+  "scripts": {
+    "start": "node app/server.js ",
+    "lint": "eslint ./app/ -f stylish",
+    "lint:fix": "eslint ./app/ -f stylish --fix"
+  },
+  "author": "Yugendrababu1992@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.6.1",
+    "express": "^4.16.4",
+    "line-by-line": "^0.1.6",
+    "mathjs": "^5.4.2",
+    "mongoose": "^5.4.9"
+  }
+}
