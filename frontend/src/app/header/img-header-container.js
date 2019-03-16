@@ -115,7 +115,7 @@ export class HeaderContainer extends React.Component {
               color='inherit'
               noWrap={true}
             >
-            Stock archives
+            SWift data
             </Typography>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
