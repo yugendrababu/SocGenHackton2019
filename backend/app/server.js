@@ -1,6 +1,6 @@
 let express = require( "express" ),
     app = express(),
-    stocksRoute = require( "./routes/stocks" ),
+    ApiRoute = require( "./routes/Api" ),
     path = require( "path" ),
     bodyParser = require( "body-parser" );
 
@@ -11,7 +11,7 @@ app.use( ( req, res, next ) => {
     next();
 } );
 
-app.use( "/", stocksRoute );
+app.use( "/", ApiRoute );
 app.use( express.static( "public" ) );
 
 // Handler for 404 - Resource Not Found

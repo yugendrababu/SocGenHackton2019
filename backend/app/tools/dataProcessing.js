@@ -23,7 +23,8 @@ const getDistinctValueData =()=>{
               .exec( ( err, data ) => {
                   if( data ) {
                     distinctValueData = data;
-                    getDistinctExchangeRate();
+                    //getDistinctExchangeRate();
+                    processMetaData(distinctContractData,distinctValueData)
                   }else {
                      console.log(err);
                   }
@@ -39,7 +40,7 @@ const getDistinctExchangeRate =()=>{
                     console.log(distinctContractData);
                     console.log(distinctValueData);
                     console.log(distinctExchangeRate);
-                  //  processMetaData(distinctContractData,distinctValueData,distinctExchangeRate)
+                     processMetaData(distinctContractData,distinctValueData)
                     //getData(distinctContractData[0],distinctValueData[0],distinctExchangeRate[0]);
                   }else {
                      console.log(err);
@@ -47,31 +48,36 @@ const getDistinctExchangeRate =()=>{
               } );
 }
 
-const processMetaData = (distinctContractData,distinctValueData,distinctExchangeRate) =>{
+const processMetaData = (distinctContractData,distinctValueData) =>{
   distinctContractData.forEach(contractDate =>{
     distinctValueData.forEach(valueDate=>{
-      distinctExchangeRate.forEach(exchangeRate =>{
-        //getData(contractDate ,valueDate ,exchangeRate);
-      })
+        getData(contractDate ,valueDate);
     })
   })
 }
-const getData = (contractDate ,valueDate ,exchangeRate) =>{
+let call=0;
+const getData = (contractDate ,valueDate) =>{
   matchingModel
-      .find({":30T":contractDate , ":30V":valueDate ,":36":exchangeRate} )
+      .find({":30T":contractDate , ":30V":valueDate} )
       .exec( ( err, data ) => {
           if( data ) {
             if (data.length>0) {
-              performCalculation(data);
+              performCalculation1(data);
             }else{
-              console.log('no data');
+              console.log(`no data ${call++}`);
             }
           }else {
              console.log(err);
           }
       } );
 }
-
+const performCalculation1 = (data) =>{
+  let uniqueRates =  [...new Set(data.map(item => item[':36']))];
+  uniqueRates.forEach(value=>{
+      let tempData = data.filter(obj=>obj[':36']===value);
+      performCalculation(tempData);
+  })
+}
 const performCalculation = (data) =>{
 
 let sg = data.filter(sgValue=>sgValue.company === 'sg');
