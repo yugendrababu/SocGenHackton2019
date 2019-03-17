@@ -17,7 +17,7 @@ const styles = theme => ({
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
-    padding: '0.5% 2% 1% 17%',
+    padding: '0.5% 2% 1% 2%',
     backgroundColor: theme.palette.background.paper,
   },
   gridList: {
@@ -35,8 +35,8 @@ const styles = theme => ({
     background: 'rgba(8, 4, 0, 0.31)',
   },
   gridListTile: {
-    width: '28% !important',
-    height: '256px !important',
+    width: '32% !important',
+    height: '170px !important',
 
   },
   gridImg: {

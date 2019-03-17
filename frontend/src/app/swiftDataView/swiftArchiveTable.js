@@ -59,12 +59,15 @@ const tableValues =
 const styles = () => ({
   root: {
     width: '100%',
+    height: '29vw',
+    overflow: 'auto'
   },
   table: {
     minWidth: 500,
   },
   tableWrapper: {
     overflowX: 'auto',
+
   },
 });
 
@@ -98,7 +101,7 @@ export class SwiftArchiveTable extends React.Component {
        <div className={classes.tableWrapper}>
          <Table className={classes.table}>
            <TableHead>
-             <TableRow style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
+             <TableRow style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)',height: 30 }}>
                {
                  tableValues.map((value) =>
                  <TableCell style={{ color: 'white' }}>{value}</TableCell>

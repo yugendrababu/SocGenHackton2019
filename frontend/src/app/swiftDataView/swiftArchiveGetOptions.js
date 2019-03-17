@@ -72,22 +72,34 @@ class SwiftArchiveGetOptions extends React.Component {
     super(props);
     this.state = {
       value: 50,
-      field: 'date',
+      field: 'matchRef',
       offset: 50,
-      category: '',
+      category: 'Total results',
     };
   }
   componentWillMount() {
-    this.props.archivesActions.getSwiftArchiveData('total', 50, 0);
+    this.props.archivesActions.getSwiftArchiveData('matchRef', 50, 0);
   }
   componentWillReceiveProps(next) {
     if (next.category && next.category !== this.props.category) {
-      this.setState({
-        value: 50,
-        offset: 0,
-        category: next.category,
-      });
-      this.props.archivesActions.getSwiftArchiveData('total', 50, 0, next.category);
+      let category = '';
+      if ( !next.category.includes('Total')) {
+        this.setState({
+          value: 50,
+          offset: 0,
+          category: next.category,
+        });
+        category=next.category;
+      }else{
+
+        this.setState({
+          value: 50,
+          offset: 0,
+          category: next.category,
+        });
+      }
+
+      this.props.archivesActions.getSwiftArchiveData('matchRef', 50, 0, category);
     }
   }
   onChangeRowsPerPage = (event) => {
@@ -115,7 +127,7 @@ class SwiftArchiveGetOptions extends React.Component {
   handleCancel = () => {
     this.setState({
       offset: 0,
-      category: '',
+      category: 'Total results',
     });
     const field = this.state.field;
     const limit = this.state.value;
@@ -134,11 +146,11 @@ class SwiftArchiveGetOptions extends React.Component {
       <div>
         <Toolbar className={classes.toolbar}>
           <Typography color='inherit' variant='h6' className={classes.caption}>
-            { !category ?
+            { !category && category.includes('Total')?
               'Total Swift Matching Results'
               :
 
-              `Viewing Swift Archive Data - ${category} Results`
+              `Viewing Swift Matching Results  - ${category} scenairo`
             }
           </Typography>
           { category ?

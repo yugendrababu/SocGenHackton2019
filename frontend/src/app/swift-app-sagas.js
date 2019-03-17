@@ -19,12 +19,13 @@ export function* watchGetSwiftCount() {
 
 export function* getSwiftArchiveData(action) {
   try {
-    const { field, limit, offset, swiftName } = action.payload;
+    const { field, limit, offset, category } = action.payload;
 
-    const data = yield call(getSwiftArchiveDataApi, field, limit, offset, swiftName);
+    const data = yield call(getSwiftArchiveDataApi, field, limit, offset, category);
 
     yield put({ type: constants.GET_ARCHIVE_DATA_SUCCESS, payload: data });
   } catch (error) {
+
     yield put({ type: constants.GET_ARCHIVE_DATA_ERROR, error });
   }
 }
