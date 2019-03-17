@@ -5,9 +5,9 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import App from '../stock-app-component';
-import config from '../../config/stock-config';
-import NoMatch from './stock-no-match-component';
+import App from '../swift-app-component';
+import config from '../../config/swift-config';
+import NoMatch from './swift-no-match-component';
 
 const { basePath } = config.path;
 

@@ -1,4 +1,4 @@
-const basePath = '/stock';
+const basePath = '/matching';
 
 export default {
   path: {

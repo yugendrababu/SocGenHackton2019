@@ -1,17 +1,33 @@
-let StocksModel = require( "../models/stocks.model" ),
-    tools = require( "../tools/tools" ),
+let matchingModel = require( "../models/matching.model" ),
     async = require( "async" ),
     express = require( "express" ),
     router = express.Router();
 const math = require( "mathjs" );
 
-// => To get total stock archives count in db
-// localhost:3000/stocks/count
-router.get( "/stock/api/stocks/count", ( req, res ) => {
-    StocksModel
+// localhost:3000/stocks/swift/stats
+router.get( "/matching/api/swift/stats", ( req, res ) => {
+    matchingModel
         .countDocuments( {}, ( err, count ) => {
             if( count ) {
-                res.status( 200 ).send( { "count": count } );
+              matchingModel
+                .find({"status":"matched"})
+                .count()
+                .exec((err,matchedCount)=>{
+                  if( matchedCount ) {
+                    matchingModel
+                      .find({"status":"notMatched"})
+                      .count()
+                      .exec((err,notMatchedCount)=>{
+                        if( notMatchedCount ) {
+                          res.status( 200 ).send( [{ "name":"Total results","value": count }, { "name":"MATCHED","value":matchedCount},{ "name":"NOT-MATCHED","value":notMatchedCount }] );
+                        }else {
+                            res.status( 500 ).send( err );
+                        }
+                      })
+                  }else {
+                      res.status( 500 ).send( err );
+                  }
+                })
             }else {
                 res.status( 500 ).send( { "error": "error" } );
             }
@@ -19,22 +35,20 @@ router.get( "/stock/api/stocks/count", ( req, res ) => {
 
 } );
 
-//  => To get stock archives list - based on date with pagination
-// localhost:3000/stocks/archives?field=date&limit=50&offset=20
-// localhost:3000/stocks/archives?field=date&limit=50&offset=20&symbol=NAVI
-router.get( "/stock/api/stocks/archives", ( req, res ) => {
+
+router.get( "/matching/api/swift/archives", ( req, res ) => {
     let field = req.query.field,
         limit = Number( req.query.limit ),
         offset = Number( req.query.offset ),
-        symbol = req.query.symbol;
+        category = req.query.category;
 
     if( field && limit ) {
-        let stockName = symbol ? { "symbol": symbol } : {};
+        let match = category ? { "status": category } : {};
 
         StocksModel
-            .find( stockName )
+            .find( match )
             .limit( limit )
-            .sort( { [ field ]: -1 } )
+            .sort( { [ 'matchRef' ]: -1 } )
             .skip( offset )
             .exec( ( err, data ) => {
                 if( data ) {
@@ -46,19 +60,5 @@ router.get( "/stock/api/stocks/archives", ( req, res ) => {
     }
 } );
 
-//  => To get stock archives list - based on date with pagination
-// localhost:3000/stocks/bestPerformers
-router.get( "/stock/api/stocks/bestPerformers", ( req, res ) => {
-    StocksModel
-        .find( { "stockName": { "$exists": true } } )
-        .sort( { "rating": -1 } )
-        .exec( ( err, data ) => {
-            if( data ) {
-                res.status( 200 ).send( data );
-            }else {
-                res.status( 500 ).send( err );
-            }
-        } );
-} );
 
 module.exports = router;

@@ -9,7 +9,7 @@ import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
-import ExpandMore from '@material-ui/icons/ExpandMore';
+import Details from '@material-ui/icons/Details';
 
 const styles = theme => ({
   root: {
@@ -17,7 +17,7 @@ const styles = theme => ({
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
-    padding: '0.5% 2% 2% 2%',
+    padding: '0.5% 2% 1% 17%',
     backgroundColor: theme.palette.background.paper,
   },
   gridList: {
@@ -35,8 +35,8 @@ const styles = theme => ({
     background: 'rgba(8, 4, 0, 0.31)',
   },
   gridListTile: {
-    width: '26% !important',
-    height: '250px !important',
+    width: '28% !important',
+    height: '256px !important',
 
   },
   gridImg: {
@@ -45,46 +45,41 @@ const styles = theme => ({
   },
   actionButton: {
     color: 'white',
+    '&:hover':{
+      cursor:'pointer'
+    }
   },
 });
 
-export class BestPerformersGridList extends React.Component {
+export class SwiftGridStats extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-
-    };
-  }
-  getSubTitle =(title) => {
-    const subTitle = title.toString().substr(0, title.toString().indexOf('.') + 4);
-
-    return `Rating : ${subTitle} %`;
   }
 
   render() {
     const { classes } = this.props;
-    const list = this.props.bestPerformersList;
+    const list = this.props.stats.length>0 ? this.props.stats:[];
 
     return (
       <div>
         <div style={{ textAlign: 'center', padding: '5px' }}>
           <div style={{ display: 'inline-block' }}>
-              Best performing stocks
+              Swift matching stats
           </div>
         </div>
         <div className={classes.root}>
           <div>
             <GridList className={classes.gridList} cols={2.5}>
               {list.map(tile =>
-                <GridListTile key={tile._id}
+                <GridListTile key={tile.name}
                   classes={{
                     root: classes.gridListTile,
                   }}
                 >
-                  <img src={'/stock/img/grid.jpg'} className={classes.gridImg} alt={tile.stockName} />
+                  <img src={'/matching/img/grid.jpg'} className={classes.gridImg} alt={tile.name} />
                   <GridListTileBar
-                    title={tile.stockName}
-                    subtitle={this.getSubTitle(tile.rating)}
+                    title={`${tile.name}`.toUpperCase()}
+                    subtitle={`${tile.value}`.toUpperCase()}
                     titlePosition='top'
                     classes={{
                       title: classes.title,
@@ -92,11 +87,8 @@ export class BestPerformersGridList extends React.Component {
                     }}
                     actionIcon={
                       <div>
-                        <IconButton>
-                          <StarBorderIcon className={classes.actionButton} />
-                        </IconButton>
-                        <IconButton onClick={() => {this.props.getGetStockName(tile.stockName);}}>
-                          <ExpandMore title={'See stock data'} className={classes.actionButton} />
+                        <IconButton onClick={() => {this.props.getMatchingCateogry(tile.name);}}>
+                          <Details title={'More Details'} className={classes.actionButton} />
                         </IconButton>
                       </div>
                     }
@@ -112,7 +104,7 @@ export class BestPerformersGridList extends React.Component {
   }
 }
 
-BestPerformersGridList.propTypes = {
+SwiftGridStats.propTypes = {
   classes: PropTypes.object,
   bestPerformersList: PropTypes.array,
   getGetStockName: PropTypes.func,
@@ -120,9 +112,9 @@ BestPerformersGridList.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    bestPerformersList: state.dataSource.bestPerformersList,
+    stats: state.dataSource.stats,
 
   };
 }
 
-export default compose(withStyles(styles), connect(mapStateToProps, null))(BestPerformersGridList);
+export default compose(withStyles(styles), connect(mapStateToProps, null))(SwiftGridStats);

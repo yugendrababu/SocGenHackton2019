@@ -1,5 +1,5 @@
 import axios from 'axios';
-import configuration from '../../config/stock-config';
+import configuration from '../../config/swift-config';
 
 const { basePath } = configuration.path;
 

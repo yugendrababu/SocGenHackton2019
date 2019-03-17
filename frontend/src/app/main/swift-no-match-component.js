@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import config from '../../config/stock-config';
+import config from '../../config/swift-config';
 
 const { basePath } = config.path;
 

@@ -115,7 +115,7 @@ export class HeaderContainer extends React.Component {
               color='inherit'
               noWrap={true}
             >
-            SWift data
+            Swift matching system
             </Typography>
             <div className={classes.search}>
               <div className={classes.searchIcon}>

@@ -14,7 +14,7 @@ import ArrowForward from '@material-ui/icons/ArrowForward';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import IconButton from '@material-ui/core/IconButton';
 import Cancel from '@material-ui/icons/Cancel';
-import * as appAction from '../stock-app-actions';
+import * as appAction from '../swift-app-actions';
 
 const styles = theme => ({
   root: {
@@ -67,27 +67,27 @@ const styles = theme => ({
   },
 });
 
-class StockArchiveGetOptions extends React.Component {
+class SwiftArchiveGetOptions extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       value: 50,
       field: 'date',
       offset: 50,
-      stockName: '',
+      category: '',
     };
   }
   componentWillMount() {
-    this.props.archivesActions.getStockArchiveData('date', 50, 0);
+    this.props.archivesActions.getSwiftArchiveData('total', 50, 0);
   }
   componentWillReceiveProps(next) {
-    if (next.stockName && next.stockName !== this.props.stockName) {
+    if (next.category && next.category !== this.props.category) {
       this.setState({
         value: 50,
         offset: 0,
-        stockName: next.stockName,
+        category: next.category,
       });
-      this.props.archivesActions.getStockArchiveData('date', 50, 0, next.stockName);
+      this.props.archivesActions.getSwiftArchiveData('total', 50, 0, next.category);
     }
   }
   onChangeRowsPerPage = (event) => {
@@ -97,51 +97,51 @@ class StockArchiveGetOptions extends React.Component {
     const field = this.state.field;
     const limit = this.state.value;
     const offset = this.state.offset;
-    const stockName = this.state.stockName;
+    const category = this.state.category;
 
-    this.props.archivesActions.getStockArchiveData(field, limit, offset, stockName);
+    this.props.archivesActions.getSwiftArchiveData(field, limit, offset, category);
     this.setState({ offset: offset + limit });
   };
   handleBack = () => {
     const field = this.state.field;
     const limit = this.state.value;
     const offset = this.state.offset;
-    const stockName = this.state.stockName;
+    const category = this.state.category;
     const offsetCheck = offset - limit < 0 ? 0 : offset - limit;
 
     this.setState({ offset: offsetCheck });
-    this.props.archivesActions.getStockArchiveData(field, limit, offsetCheck, stockName);
+    this.props.archivesActions.getSwiftArchiveData(field, limit, offsetCheck, category);
   };
   handleCancel = () => {
     this.setState({
       offset: 0,
-      stockName: '',
+      category: '',
     });
     const field = this.state.field;
     const limit = this.state.value;
     const offset = this.state.offset;
 
-    this.props.archivesActions.getStockArchiveData(field, limit, 0, '');
+    this.props.archivesActions.getSwiftArchiveData(field, limit, 0, '');
     this.setState({ offset: offset + limit });
-    this.props.getGetStockName('');
+    this.props.getMatchingCateogry('');
   }
 
   render() {
     const { classes } = this.props;
-    const { value, stockName } = this.state;
+    const { value, category } = this.state;
 
     return (
       <div>
         <Toolbar className={classes.toolbar}>
           <Typography color='inherit' variant='h6' className={classes.caption}>
-            { !stockName ?
-              'All Stock Archive Data'
+            { !category ?
+              'Total Swift Matching Results'
               :
 
-              `Viewing Stock Archive Data - ${stockName}`
+              `Viewing Swift Archive Data - ${category} Results`
             }
           </Typography>
-          { stockName ?
+          { category ?
             <IconButton
               style={{ color: '#f67100' }}
               title ={'reset'}
@@ -196,11 +196,11 @@ class StockArchiveGetOptions extends React.Component {
   }
 }
 
-StockArchiveGetOptions.propTypes = {
+SwiftArchiveGetOptions.propTypes = {
   classes: PropTypes.object.isRequired,
-  stockName: PropTypes.string,
+  category: PropTypes.string,
   archivesActions: PropTypes.object,
-  getGetStockName: PropTypes.func,
+  getGetSwiftName: PropTypes.func,
 };
 function mapStateToProps(state) {
   return {
@@ -213,4 +213,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default compose(withStyles(styles), connect(mapStateToProps, mapDispatchToProps))(StockArchiveGetOptions);
+export default compose(withStyles(styles), connect(mapStateToProps, mapDispatchToProps))(SwiftArchiveGetOptions);

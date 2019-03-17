@@ -1,7 +1,7 @@
 {
-  "name": "stocks-app",
+  "name": "swift-matching",
   "version": "1.0.0",
-  "description": "stocks-app",
+  "description": "swift-matching",
   "scripts": {
     "start": "webpack-dev-server ",
     "test": "karma start --no-single-run --auto-watch --isTDD",

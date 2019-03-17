@@ -1,5 +1,5 @@
-import { watcher as AppSaga } from './stock-app-sagas';
-import AppReducer from './stock-app-reducers';
+import { watcher as AppSaga } from './swift-app-sagas';
+import AppReducer from './swift-app-reducers';
 
 export default {
   AppSaga,

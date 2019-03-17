@@ -14,8 +14,47 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-import * as appAction from '../stock-app-actions';
+import * as appAction from '../swift-app-actions';
 import TablePaginationActions from './TablePagination';
+
+const tableValues =
+[
+  ":20": ":20",
+  ":21": ":21",
+  ":22A":":22A",
+  ":22C":":22C",
+  ":94A":":94A",
+  ":82": ":82",
+  ":82A":":82A",
+  ":82D":":82D",
+  ":82J":":82J",
+  ":87": ":87",
+  ":77H":":77H",
+  ":30T":":30T",
+  ":30V":":30V",
+  ":36": ":36",
+  ":32B":":32B",
+  ":53": ":53",
+  ":53A":":53A",
+  ":53D":":53D",
+  ":53J":":53J",
+  ":56": ":56",
+  ":56A":":56A",
+  ":56D":":56D",
+  ":56J":":56J",
+  ":57": ":57",
+  ":57A":":57A",
+  ":57D":":57D",
+  ":57J":":57J",
+  ":58": ":58",
+  ":58A":":58A",
+  ":58D":":58D",
+  ":58J":":58J",
+  ":33B":":33B",
+  ":72": ":72",
+  "company": 'company',
+  "status":'status',
+  "matchRef":'matchRef']
 
 const styles = () => ({
   root: {
@@ -29,7 +68,7 @@ const styles = () => ({
   },
 });
 
-export class StockArchiveTable extends React.Component {
+export class SwiftArchiveTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -60,13 +99,10 @@ export class StockArchiveTable extends React.Component {
          <Table className={classes.table}>
            <TableHead>
              <TableRow style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
-               <TableCell style={{ color: 'white' }}>Date</TableCell>
-               <TableCell style={{ color: 'white' }} align='left'>symbol</TableCell>
-               <TableCell style={{ color: 'white' }} align='left'>open</TableCell>
-               <TableCell style={{ color: 'white' }} align='left'>close</TableCell>
-               <TableCell style={{ color: 'white' }} align='left'>low</TableCell>
-               <TableCell style={{ color: 'white' }} align='left'>high</TableCell>
-               <TableCell style={{ color: 'white' }} align='left'>volume</TableCell>
+               {
+                 tableValues.map((value) =>
+                 <TableCell style={{ color: 'white' }}>{value}</TableCell>
+               )}
              </TableRow>
            </TableHead>
            <TableBody>
@@ -74,15 +110,10 @@ export class StockArchiveTable extends React.Component {
                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                .map(row =>
                  <TableRow key={row._id} style={{ height: 20 }}>
-                   <TableCell component='th' scope='row'>
-                     {row.date}
-                   </TableCell>
-                   <TableCell align='left'>{row.symbol}</TableCell>
-                   <TableCell align='left'>{row.open}</TableCell>
-                   <TableCell align='left'>{row.close}</TableCell>
-                   <TableCell align='left'>{row.low}</TableCell>
-                   <TableCell align='left'>{row.high}</TableCell>
-                   <TableCell align='left'>{row.volume}</TableCell>
+                   {
+                     tableValues.map((value) =>
+                     <TableCell align='left'>{row[value]}</TableCell>
+                   )}
                  </TableRow>
                )}
              {emptyRows > 0 &&
@@ -115,7 +146,7 @@ export class StockArchiveTable extends React.Component {
  }
 }
 
-StockArchiveTable.propTypes = {
+SwiftArchiveTable.propTypes = {
   archiveData: PropTypes.array,
   classes: PropTypes.object.isRequired,
 };
@@ -131,4 +162,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default compose(withStyles(styles), connect(mapStateToProps, mapDispatchToProps))(StockArchiveTable);
+export default compose(withStyles(styles), connect(mapStateToProps, mapDispatchToProps))(SwiftArchiveTable);

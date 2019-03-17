@@ -46,10 +46,10 @@ module.exports = {
   },
 
   output: {
-    path: path.resolve(__dirname, 'dist/stock'),
+    path: path.resolve(__dirname, 'dist/matching'),
     filename: '[name].bundle.[hash].js',
     pathinfo: true,
-    publicPath: '/stock/'
+    publicPath: '/matching/'
   },
 
   devServer: {
@@ -57,20 +57,20 @@ module.exports = {
     contentBase: './dist',
     allowedHosts: ['10.0.2.2'],
     proxy: {
-      '/stock/api/**': {
-        target: 'http://localhost:3000/',
+      '/matching/api/**': {
+        target: 'http://localhost:3001/',
       },
       '/**': {
-        target: '/stock/index.html',
+        target: '/matching/index.html',
         secure: false,
         bypass: function(req, res, opt){
-          var jsregexp=/(\/stock\/[a-z]+\.[a-z]+\.[a-zA-Z0-9]+\.js$)/gi
+          var jsregexp=/(\/matching\/[a-z]+\.[a-z]+\.[a-zA-Z0-9]+\.js$)/gi
 
           if(jsregexp.test(req.path)||req.path.indexOf('.css') !== -1 || req.path.indexOf('img/') !== -1 || req.path.indexOf('assets/') !== -1 || req.path.indexOf('fonts/') !== -1){
-            return '/stock'
+            return '/matching'
           }
           if (req.headers.accept.indexOf('html') !== -1) {
-            return '/stock/index.html';
+            return '/matching/index.html';
           }
         },
       },
