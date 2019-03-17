@@ -236,8 +236,8 @@ const getData = ( contractDate, valueDate ) => {
                 console.log( sgAmount );
                 console.log( clientAmount );
                 client[ index ].status = "matched";
-                client[ index ].matchRef = sg[ sgArray[ i ] ][ ":20" ];
-                for ( let i = 0; i < clientArray.length; i++ ) {
+                client[ index ].matchRef = sg[ sgArray[ 0 ] ][ ":20" ];
+                for ( let i = 0; i < sgArray.length; i++ ) {
                     sg[ sgArray[ i ] ].status = "matched";
                     sg[ sgArray[ i ] ].matchRef = client[ index ][ ":20" ];
                 }
