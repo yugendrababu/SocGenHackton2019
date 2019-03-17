@@ -19,48 +19,48 @@ import TablePaginationActions from './TablePagination';
 
 const tableValues =
 [
-  ":20": ":20",
-  ":21": ":21",
-  ":22A":":22A",
-  ":22C":":22C",
-  ":94A":":94A",
-  ":82": ":82",
-  ":82A":":82A",
-  ":82D":":82D",
-  ":82J":":82J",
-  ":87": ":87",
-  ":77H":":77H",
-  ":30T":":30T",
-  ":30V":":30V",
-  ":36": ":36",
-  ":32B":":32B",
-  ":53": ":53",
-  ":53A":":53A",
-  ":53D":":53D",
-  ":53J":":53J",
-  ":56": ":56",
-  ":56A":":56A",
-  ":56D":":56D",
-  ":56J":":56J",
-  ":57": ":57",
-  ":57A":":57A",
-  ":57D":":57D",
-  ":57J":":57J",
-  ":58": ":58",
-  ":58A":":58A",
-  ":58D":":58D",
-  ":58J":":58J",
-  ":33B":":33B",
-  ":72": ":72",
-  "company": 'company',
-  "status":'status',
-  "matchRef":'matchRef']
+  ':20': ":20",
+  ':21': ":21",
+  ':22A':":22A",
+  ':22C':":22C",
+  ':94A':":94A",
+  ':82': ":82",
+  ':82A':":82A",
+  ':82D':":82D",
+  ':82J':":82J",
+  ':87': ":87",
+  ':77H':":77H",
+  ':30T':":30T",
+  ':30V':":30V",
+  ':36': ":36",
+  ':32B':":32B",
+  ':53': ":53",
+  ':53A':":53A",
+  ':53D':":53D",
+  ':53J':":53J",
+  ':56': ":56",
+  ':56A':":56A",
+  ':56D':":56D",
+  ':56J':":56J",
+  ':57': ":57",
+  ':57A':":57A",
+  ':57D':":57D",
+  ':57J':":57J",
+  ':58': ":58",
+  ':58A':":58A",
+  ':58D':":58D",
+  ':58J':":58J",
+  ':33B':":33B",
+  ':72': ":72",
+  'company': 'company',
+  'status':'status',
+  'matchRef':'matchRef'];
 
 const styles = () => ({
   root: {
     width: '100%',
     height: '29vw',
-    overflow: 'auto'
+    overflow: 'auto',
   },
   table: {
     minWidth: 500,
@@ -101,11 +101,11 @@ export class SwiftArchiveTable extends React.Component {
        <div className={classes.tableWrapper}>
          <Table className={classes.table}>
            <TableHead>
-             <TableRow style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)',height: 30 }}>
+             <TableRow style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', height: 30 }}>
                {
-                 tableValues.map((value) =>
-                 <TableCell style={{ color: 'white' }}>{value}</TableCell>
-               )}
+                 tableValues.map(value =>
+                   <TableCell style={{ color: 'white' }}>{value}</TableCell>
+                 )}
              </TableRow>
            </TableHead>
            <TableBody>
@@ -114,9 +114,9 @@ export class SwiftArchiveTable extends React.Component {
                .map(row =>
                  <TableRow key={row._id} style={{ height: 20 }}>
                    {
-                     tableValues.map((value) =>
-                     <TableCell align='left'>{row[value]}</TableCell>
-                   )}
+                     tableValues.map(value =>
+                       <TableCell align='left'>{row[value]}</TableCell>
+                     )}
                  </TableRow>
                )}
              {emptyRows > 0 &&

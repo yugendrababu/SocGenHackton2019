@@ -10,12 +10,11 @@ import SwiftGridStats from 'app/swiftMatchingStats/swift-matching-Stats-grid';
 import SwiftArchiveTable from 'app/swiftDataView/swiftArchiveTable';
 import SwiftArchiveGetOptions from 'app/swiftDataView/swiftArchiveGetOptions';
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      category:''
+      category: '',
     };
   }
   componentWillMount() {
@@ -25,19 +24,20 @@ class App extends React.Component {
     this.setState({ category: name });
   }
   render() {
-        const category = this.state.category;
+    const category = this.state.category;
+
     return (
       <div >
         <div>
           <Header/>
         </div>
         <div>
-          <SwiftGridStats  getMatchingCateogry={this.getMatchingCateogry}/>
+          <SwiftGridStats getMatchingCateogry={this.getMatchingCateogry}/>
         </div>
         <div style={{ width: '96%', padding: '0.25% 2% 2% 2%' }}>
           <div style={{ textAlign: 'left', padding: '5px' }}>
             <div style={{ display: 'inline-block' }}>
-                <SwiftArchiveGetOptions category={category} getMatchingCateogry={this.getMatchingCateogry} />
+              <SwiftArchiveGetOptions category={category} getMatchingCateogry={this.getMatchingCateogry} />
             </div>
           </div>
           <SwiftArchiveTable />

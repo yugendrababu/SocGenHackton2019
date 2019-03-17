@@ -83,15 +83,15 @@ class SwiftArchiveGetOptions extends React.Component {
   componentWillReceiveProps(next) {
     if (next.category && next.category !== this.props.category) {
       let category = '';
-      if ( !next.category.includes('Total')) {
+
+      if (!next.category.includes('Total')) {
         this.setState({
           value: 50,
           offset: 0,
           category: next.category,
         });
-        category=next.category;
-      }else{
-
+        category = next.category;
+      } else {
         this.setState({
           value: 50,
           offset: 0,
@@ -146,7 +146,7 @@ class SwiftArchiveGetOptions extends React.Component {
       <div>
         <Toolbar className={classes.toolbar}>
           <Typography color='inherit' variant='h6' className={classes.caption}>
-            { !category && category.includes('Total')?
+            { !category && category.includes('Total') ?
               'Total Swift Matching Results'
               :
 

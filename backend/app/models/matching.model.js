@@ -40,10 +40,10 @@ let DataSchema = new mongoose.Schema( {
     ":33B": String,
     ":72": String,
     "company": String,
-    "status":String,
-    "matchRef":String
-//18 fields
-} ,
+    "status": String,
+    "matchRef": String
+// 18 fields
+},
 { "collection": "swiftData" }
 );
 

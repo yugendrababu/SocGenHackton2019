@@ -6,7 +6,6 @@ const SWIFT_ARCHIVE_DATA = '/api/swift/archives';
 export const getSwiftCountApi = () => axios.get(SWIFT_COUNT_API)
   .then(response => response.data);
 
-
 export const getSwiftArchiveDataApi = (field, limit, offset, category) =>
   axios.get(`${SWIFT_ARCHIVE_DATA}?field=${field}&limit=${limit}&offset=${offset}&category=${category ? category : ''}`,
     {

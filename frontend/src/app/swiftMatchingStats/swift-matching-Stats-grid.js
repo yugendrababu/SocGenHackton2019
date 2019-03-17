@@ -45,9 +45,9 @@ const styles = theme => ({
   },
   actionButton: {
     color: 'white',
-    '&:hover':{
-      cursor:'pointer'
-    }
+    '&:hover': {
+      cursor: 'pointer',
+    },
   },
 });
 
@@ -58,7 +58,7 @@ export class SwiftGridStats extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const list = this.props.stats.length>0 ? this.props.stats:[];
+    const list = this.props.stats.length > 0 ? this.props.stats : [];
 
     return (
       <div>

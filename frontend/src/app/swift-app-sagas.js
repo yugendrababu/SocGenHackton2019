@@ -25,7 +25,6 @@ export function* getSwiftArchiveData(action) {
 
     yield put({ type: constants.GET_ARCHIVE_DATA_SUCCESS, payload: data });
   } catch (error) {
-
     yield put({ type: constants.GET_ARCHIVE_DATA_ERROR, error });
   }
 }
